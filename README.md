@@ -1,2 +1,2 @@
-# tripleA
+# AgendAI
 Assistant Automatique d'Agenda
