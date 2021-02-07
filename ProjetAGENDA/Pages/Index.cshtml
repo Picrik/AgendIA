@@ -1,0 +1,52 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+
+
+<div class="text-center">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <h1 class="display-4">Welcome @User.Identity.Name!</h1>
+        @if (Model.Events == null)
+        {
+            <p>You don't have any Appointments right now.</p>
+        }
+        else
+        {
+            <div class="card-columns">
+                @foreach (var cEvent in Model.Events)
+                {
+                <div class="card">
+
+                    <div class="card-img" style="background-color: #e0e1fd">
+                        <ul>
+                            <li>Id: @cEvent.Id</li>
+                            <li>StartTime: @cEvent.StartDateTime</li>
+                            <li>EndTime: @cEvent.EndDateTime</li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <h4>@cEvent.Subject</h4>
+                    </div>
+                </div>
+                }
+            </div>
+        }
+    }
+    else
+    {
+        <h1 class="display-4">Welcome to AgendIA</h1>
+        <p>
+            To experience this revolutionizing product, please log into your account by following this
+            <a href="Identity/Account/Login">link right here</a>.
+        </p>
+    }
+
+</div>
