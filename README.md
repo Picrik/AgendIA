@@ -1,2 +1,2 @@
-# AgendAI
+# AgendIA
 Assistant Automatique d'Agenda
