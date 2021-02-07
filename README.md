@@ -28,7 +28,7 @@ Those json are named under the pseudonym of the user account.
 You can send to a json a new event to treat by associating with pseudonym.
 GET command is as follows:
 ```bash
-AddEvent?PersonId=[pseudo]&Maker=[Name]&StartDateTime=[dd-mm-yyyy-hh-mm]&EndDateTime=[dd-mm-yyyy-hh-mm]&Subject=[subject]
+localhost:[port]/events/AddEvent?PersonId=[pseudo]&Maker=[Name]&StartDateTime=[dd-mm-yyyy-hh-mm]&EndDateTime=[dd-mm-yyyy-hh-mm]&Subject=[subject]
 ```
 
 ### Integration with IBM Chatbot
