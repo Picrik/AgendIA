@@ -1,0 +1,247 @@
+{% load static %}
+{% csrf_token %}
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <title>
+        AgendAI
+    </title>
+
+    <meta name="viewport" content="width=device-width, user-scalable=yes">
+
+    <link rel="shortcut icon" href="{% static 'myPWA/logo.png' %}"/>
+
+    <link rel="stylesheet" type= "text/css" href="{% static 'myPWA/style.css' %}">
+
+    <link href=
+"https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            rel="stylesheet">
+
+    <script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"
+    type="text/javascript">
+    </script>
+
+    <script src=
+"https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js">
+    </script>
+</head>
+
+
+
+<body style="background-color: white;>
+
+        <div class="tab">   <!--rgb(240,237,237)-->
+        <div>
+
+    <!-- Début du scanner QR code -->
+    <div id = "Scanner"  class="tabcontent"></div>
+    <button onclick='clone()' style='height:50px;width:80px;margin:auto'>Photo</button>
+
+    <script src="{% static 'myPWA/html5-qrcode.min.js' %}"></script>
+    <script type="text/javascript">
+        function onScanSuccess(qrCodeMessage) {
+                alert(qrCodeMessage);
+        }
+
+        var html5QrcodeScanner = new Html5QrcodeScanner(
+            "Scanner", { fps: 10, qrbox: 250 });
+        html5QrcodeScanner.render(onScanSuccess);
+    </script>
+
+            <!-- Fin QR code -->
+
+    <br><br>
+            <!-- Début photo d'affiche -->
+        <video id="sourcevid" height='1' width='1' autoplay="true"  style='display:inline'></video>
+
+		<div id="main" style='height:900px;width:600px;margin:auto;display:inline'>
+
+        <canvas id="cvs" height='900' width='600'></canvas>
+
+
+        <textarea id='tar' style='width:50%;height:200px;'></textarea>  <!-- Photo en base 64 -->
+
+            <!-- Fin photo d'affiche -->
+
+            <br>
+            <br><!--Agenda-->
+                   <div id="Calendrier"  class="container tabcontent">
+
+                        <div class="calendar">
+
+                            <header>
+
+                                <h2>février</h2>
+
+                            <a class="btn-prev fontawesome-angle-left" href="#"></a>
+                            <a class="btn-next fontawesome-angle-right" href="#"></a>
+                                <div class="containerrdv">
+                            <p>Votre prochain rendez-vous : <br>
+                                <strong>Rendez-vous aujourd'hui à 15h30 chez le dentiste</strong></p>
+                                </div>
+                            </header>
+
+                            <table>
+
+                            <thead>
+
+                                <tr>
+
+                                <td>lu</td>
+                                <td>ma</td>
+                                <td>me</td>
+                                <td>je</td>
+                                <td>ve</td>
+                                <td>sa</td>
+                                <td>di</td>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td>6</td>
+                                <td>7</td>
+                                </tr>
+                                <tr>
+                                <td class="current-day event">8</td>
+                                <td class="event">9</td>
+                                <td>10</td>
+                                <td>11</td>
+                                <td>12</td>
+                                <td>13</td>
+                                <td>14</td>
+                                </tr>
+                                <tr>
+                                <td>15</td>
+                                <td>16</td>
+                                <td>17</td>
+                                <td>18</td>
+                                <td>19</td>
+                                <td class="event">20</td>
+                                <td>21</td>
+                                </tr>
+
+                                <tr>
+                                <td>22</td>
+                                <td>23</td>
+                                <td>24</td>
+                                <td>25</td>
+                                <td>26</td>
+                                <td>27</td>
+                                <td>28</td>
+                                </tr>
+                                <td class="next-month"> <strong>Mars</strong></td>
+                                <tr>
+                                <td class="next-month"><strong>1</strong></td>
+                                <td class="next-month"><strong>2</strong></td>
+                                <td class="next-month"><strong>3</strong></td>
+                                <td class="next-month"><strong>4</strong></td>
+                                <td class="next-month"><strong>5</strong></td>
+                                <td class="next-month"><strong>6</strong></td>
+                                <td class="next-month"><strong>7</strong></td>
+                                </tr>
+                                <tr>
+                                <td class="next-month"><strong>8</strong></td>
+                                <td class="next-month"><strong>9</strong></td>
+                                <td class="next-month"><strong>10</strong></td>
+                                <td class="next-month"><strong>11</strong></td>
+                                <td class="next-month"><strong>12</strong></td>
+                                <td class="next-month"><strong>13</strong></td>
+                                <td class="next-month"><strong>14</strong></td>
+                                </tr>
+
+                            </tbody>
+
+                            </table>
+
+                        </div> <!-- end calendar -->
+                   </div> <!-- end container -->
+                   <!--Fin agenda-->
+
+        <p id="topic_text"></p>
+        <p id="topic_date"></p>
+      <!-- Script de la prise de photo pour affiche -->
+    <script type="text/javascript">
+    base64 = ""
+
+
+
+	function init() {
+
+		navigator.mediaDevices.getUserMedia({ audio: false, video: { width: 800, height: 600 } }).then(function(mediaStream) {
+
+			var video = document.getElementById('sourcevid');
+			video.srcObject = mediaStream;
+
+			video.onloadedmetadata = function(e) {
+				video.play();
+			};
+
+		}).catch(function(err) { console.log(err.name + ": " + err.message); });
+    }
+
+
+    function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
+	function clone(){
+            var vivi = document.getElementById('sourcevid');
+            var canvas1 = document.getElementById('cvs').getContext('2d');
+            canvas1.drawImage(vivi, 0,0, 900, 600);
+            var base64=document.getElementById('cvs').toDataURL("image/png");
+            document.getElementById('tar').value='';
+            document.getElementById('tar').value=base64;
+
+            const csrftoken = getCookie('csrftoken');
+
+
+            $.ajax({
+                url:"addtask",
+                method: "POST",
+                beforeSend: function(xhr){xhr.setRequestHeader('X-CSRFToken', csrftoken)},
+                data: {"image":base64},
+                dataType: "image/jpg",
+            }).done(function(response){
+                console.log("!!!")
+                let data = JSON.stringify(response);
+                //$("div#res").append(data);
+                console.log(data)
+            })
+
+
+            document.getElementById('tar').value='';
+            document.getElementById('tar').value=base64;
+
+     }
+
+
+	function clear(){ tar = "" }
+
+	window.onload = init;
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,259 @@
+@use postcss-preset-env;
+
+/* ---------- FONTAWESOME ---------- */
+/* ---------- https://fortawesome.github.com/Font-Awesome/ ---------- */
+/* ---------- http://weloveiconfonts.com/ ---------- */
+
+@import url(https://weloveiconfonts.com/api/?family=fontawesome);
+
+*[class*="fontawesome-"]:before {
+  font-family: 'FontAwesome', sans-serif;
+}
+
+/* ---------- GENERAL ---------- */
+
+body {
+	background: #f9f9f9;
+	color: #0e171c;
+    display: grid;
+	font: 300 100%/1.5em 'Lato', sans-serif;
+	margin: 0;
+    min-height: 100vh;
+    place-items: center;
+}
+
+a {
+	text-decoration: none;
+}
+
+h2 {
+	font-size: 2em;
+	line-height: 1.25em;
+	margin: .25em 0;
+}
+
+h3 {
+	font-size: 1.5em;
+	line-height: 1em;
+	margin: .33em 0;
+}
+/*.bloc
+{
+    position: absolute;
+    height: 300px;
+    width:300px;
+    margin-top:80px;
+    margin-left:900px;
+    padding-bottom: 100%;
+}*/
+
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.container {
+	width: 510px;
+}
+
+.containerrdv {
+	width: 500px;
+	background-color: #f5f6fa;
+    border-radius: 10px;
+    height: 40px;
+    text-align: center;
+	/*font*/
+	font-size: 1em;
+	line-height: 1em;
+	margin: .33em 0;
+}
+
+/* ---------- CALENDAR ---------- */
+
+.calendar {
+	text-align: center;
+}
+
+.calendar header {
+	position: relative;
+}
+
+.calendar h2 {
+	text-transform: uppercase;
+}
+
+.calendar thead {
+	font-weight: 600;
+	text-transform: uppercase;
+}
+
+.calendar tbody {
+	color: #7c8a95;
+}
+
+.calendar tbody td:hover {
+	border: 2px solid #00addf;
+}
+
+.calendar td {
+	border: 2px solid transparent;
+	border-radius: 50%;
+	display: inline-block;
+	height: 4em;
+	line-height: 4em;
+	text-align: center;
+	width: 4em;
+}
+
+.calendar .prev-month,
+.calendar .next-month {
+	color: #cbd1d2;
+}
+
+.calendar .prev-month:hover,
+.calendar .next-month:hover {
+	border: 2px solid #cbd1d2;
+}
+
+.current-day {
+	background: #00addf;
+	color: #f9f9f9;
+}
+
+.event {
+	cursor: pointer;
+	position: relative;
+}
+
+.event:after {
+	background: #00addf;
+	border-radius: 50%;
+	bottom: .5em;
+	display: block;
+	content: '';
+	height: .5em;
+	left: 50%;
+	margin: -.25em 0 0 -.25em;
+	position: absolute;
+	width: .5em;
+}
+
+.event.current-day:after {
+	background: #f9f9f9;
+}
+
+.btn-prev,
+.btn-next {
+	border: 2px solid #cbd1d2;
+	border-radius: 50%;
+	color: #cbd1d2;
+	height: 2em;
+	font-size: .75em;
+	line-height: 2em;
+	margin: -1em;
+	position: absolute;
+	top: 50%;
+	width: 2em;
+}
+
+.btn-prev:hover,
+.btn-next:hover {
+	background: #cbd1d2;
+	color: #f9f9f9;
+}
+
+.btn-prev {
+	left: 6em;
+}
+
+.btn-next {
+	right: 6em;
+}
+
+.column, .columns {
+  width: 100%;
+  float: left;
+  box-sizing: border-box;
+}
+/* For devices larger than 400px */
+@media (min-width: 400px) {
+  .container {
+      width: 85%;
+      padding: 0;
+ }
+}
+/* For devices larger than 550px */
+@media (min-width: 550px) {
+  .container {
+      width: 80%;
+ }
+  .column, .columns {
+      margin-left: 2%;
+
+ }
+  .column:first-child, .columns:first-child {
+      margin-left: 0;
+ }
+  .one.column, .one.columns {
+      width: 4.66666666667%;
+ }
+  .two.columns {
+      width: 13.3333333333%;
+ }
+  .three.columns {
+      width: 22%;
+ }
+  .four.columns {
+      width: 30.6666666667%;
+ }
+  .five.columns {
+      width: 39.3333333333%;
+ }
+  .six.columns {
+      width: 48%;
+ }
+  .seven.columns {
+      width: 56.6666666667%;
+ }
+  .eight.columns {
+      width: 65.3333333333%;
+ }
+  .nine.columns {
+      width: 74.0%;
+ }
+  .ten.columns {
+      width: 82.6666666667%;
+ }
+  .eleven.columns {
+      width: 91.3333333333%;
+ }
+  .twelve.columns {
+      width: 100%;
+      margin-left: 0;
+ }
+  .one-third.column {
+      width: 30.6666666667%;
+ }
+  .two-thirds.column {
+      width: 65.3333333333%;
+ }
+  .one-half.column {
+      width: 48%;
+ }
+ .seventy_percent.row{
+        height: 70vh;
+ }
+  .eighty_percent.row {
+      height: 80vh;
+  }
+  .ten_percent.row{
+      height: 10vh;
+  }
+  .twenty_percent.row {
+      height: 20vh;
+  }
+  .height_percent.row{
+      height: 8vh;
+  }
+}

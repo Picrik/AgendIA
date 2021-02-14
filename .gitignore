@@ -1,0 +1,7 @@
+.idea
+venv
+image.png
+db.sqlite3
+certname.key
+certname.crt
+google_api_key
